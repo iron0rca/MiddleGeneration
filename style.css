@@ -154,7 +154,7 @@
 /* 消息滚动工具栏样式 */
 .scroll-toolbar {
     position: absolute;
-    right: 20px;
+    left: 5px;
     bottom: 45px;
     display: flex;
     flex-direction: column;

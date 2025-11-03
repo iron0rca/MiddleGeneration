@@ -399,12 +399,11 @@ async function initializeUI() {
 
     // 如果存在genid，则高亮对应的按钮
     eventSource.on(eventTypes.CHAT_CHANGED, highlightGenHereButton);
-    eventSource.on(eventTypes.APP_READY, () => {
+    eventSource.on(eventTypes.CHAT_CHANGED, () => {
         if (context.extensionSettings[extensionName].enableScrollToolbar) {
             addMessageScrollToolbar();
         }
     });
-    eventSource.on('GENID_CHANGED', onGenidScrollClick);
     eventSource.on(eventTypes.CHAT_CHANGED , () => {
         onGenidScrollClick();
     });
@@ -465,12 +464,12 @@ function addMessageScrollToolbar() {
     // 创建滚动工具栏HTML
     const toolbarHtml = `
         <div id="messageScrollToolbar" class="scroll-toolbar">
-            <button id="incrementMesidBtn" class="menu_button" title="增加mesid值">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-            <input type="text" id="mesidInput" class="mesid-input" placeholder="mesid">
             <button id="decrementMesidBtn" class="menu_button" title="减小mesid值">
                 <i class="fa-solid fa-minus"></i>
+            </button>
+            <input type="text" id="mesidInput" class="mesid-input" placeholder="mesid">
+            <button id="incrementMesidBtn" class="menu_button" title="增加mesid值">
+                <i class="fa-solid fa-plus"></i>
             </button>
             <button id="scrollToMessageBtn" class="menu_button" title="滚动到消息">
                 <i class="fa-solid fa-arrow-down"></i>
@@ -481,8 +480,9 @@ function addMessageScrollToolbar() {
         </div>
     `;
 
-    // 将工具栏添加到聊天区域内部
-    $('#chat').append(toolbarHtml);
+    // 将工具栏添加到body元素
+    $('#sheld').append(toolbarHtml);
+    $('#mesidInput').val(SillyTavern.getContext().chatMetadata['genid'] || '');
 }
 
 // 高亮显示消息生成按钮
@@ -706,7 +706,6 @@ function onDecrementMesidClick() {
 function onGenidScrollClick() {
     const context = SillyTavern.getContext();
     let genid = context.chatMetadata['genid'];
-
     // 如果genid是undefined，则设置为当前chat内存在的最大mesid
     if (genid === undefined) {
         const chatDiv = document.getElementById('chat');
@@ -740,10 +739,10 @@ async function onSendButtonClick() {
 
 // 消息生成点击事件
 async function onMessageGenerationClick() {
+    const context = SillyTavern.getContext();
     const mesDiv = $(this).closest('.mes');
     if (mesDiv.length) {
         const mesid = mesDiv.attr('mesid');
-        const context = SillyTavern.getContext();
         const thisChat = context.chat[parseInt(mesid)];
         if (thisChat.is_system === true) {
             toastr.error('无法从隐藏消息开始生成，请选择可见消息');
@@ -751,32 +750,29 @@ async function onMessageGenerationClick() {
         }
         // 检查是否已经高亮，如果是则移除genid
         if (context.chatMetadata['genid'] === mesid) {
+            $('.gen-here-active').removeClass('gen-here-active');
+            toastr.info('已取消生成位置设置');
             // 移除genid
             delete context.chatMetadata['genid'];
             await saveMetadata();
-            await saveChatConditional();
-            toastr.info('已取消生成位置设置');
-
-            // 移除所有消息生成按钮的高亮样式
-            $('.mes_gen_here').removeClass('gen-here-active');
         } else {
             // 设置新的genid
             context.chatMetadata['genid'] = mesid;
-            await saveMetadata();
-            await saveChatConditional();
-            toastr.info(`将从 #${mesid} 后开始生成消息`);
-            // 移除所有消息生成按钮的高亮样式
-            $('.mes_gen_here').removeClass('gen-here-active');
-
-            // 为当前点击的按钮添加高亮样式
+            $('.gen-here-active').removeClass('gen-here-active');
             $(this).addClass('gen-here-active');
+            $('#mesidInput').val(mesid);
+            toastr.info(`将从 #${mesid} 后开始生成消息`);
+            await saveMetadata();
+            await eventSource.emit('GENID_CHANGED', mesid);
         }
     }
-    await eventSource.emit('GENID_CHANGED', SillyTavern.getContext().chatMetadata['genid']);
 }
+
+
 
 // 消息插入点击事件
 async function onMessageInsertClick() {
+    const context = SillyTavern.getContext();
     // 获取当前消息的文本内容
     const mesDiv = $(this).closest('.mes');
     if (mesDiv.length) {
