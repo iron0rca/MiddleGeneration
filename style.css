@@ -1,0 +1,214 @@
+/* 消息历史记录面板样式 */
+#message_history_panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-height: 70vh;
+    background: var(--SmartThemeBlurTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+}
+
+#message_history_panel .panel_header {
+    padding: 15px;
+    border-bottom: 1px solid var(--SmartThemeBorderColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#message_history_panel .panel_header h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#message_history_panel .panel_controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#message_history_panel .panel_controls button {
+    min-width: auto;
+    padding: 5px 10px;
+}
+
+#message_history_panel .panel_content {
+    padding: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.message_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message_item {
+    background: var(--SmartThemeBlurTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+    display: flex;
+}
+
+.message_text {
+    flex: 1;
+    margin-bottom: 5px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.message_item .side_panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 10px;
+    min-width: 80px;
+}
+
+.message_item .button_row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.message_item .menu_button {
+    margin-left: 0;
+    padding: 5px;
+    min-width: 30px;
+}
+
+
+.message_timestamp {
+    font-size: 0.8em;
+    color: var(--text-color-tertiary);
+    text-align: right;
+}
+
+.message_text {
+    margin-bottom: 5px;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.message_timestamp {
+    font-size: 0.8em;
+    color: var(--text-color-tertiary);
+    margin-bottom: 10px;
+}
+
+
+.no_messages {
+    text-align: center;
+    color: var(--text-color-tertiary);
+    font-style: italic;
+    padding: 20px;
+}
+
+/* 搜索框样式 */
+#message_search {
+    margin-right: 10px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--SmartThemeBorderColor);
+    background-color: var(--black30a);
+    color: var(--text-color);
+}
+
+#message_history_panel .panel_content {
+    padding: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: 300px;
+}
+
+/* 消息生成按钮高亮样式 */
+.mes_gen_here.gen-here-active {
+    color: #ffcc00 !important; /* 金色 */
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5) !important;
+}
+
+#message_history_panel .panel_footer {
+    padding: 10px 15px;
+    border-top: 1px solid var(--SmartThemeBorderColor);
+    text-align: center;
+    background: var(--SmartThemeBlurTintColor);
+}
+
+#close_message_history_panel {
+    min-width: 80px;
+    padding: 8px 15px;
+}
+
+/* 消息滚动工具栏样式 */
+.scroll-toolbar {
+    position: absolute;
+    right: 20px;
+    bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 100;
+    background: var(--SmartThemeBlurTintColor);
+    /* padding: 10px; */
+    /* border-radius: 5px; */
+    /* border: 1px solid var(--SmartThemeBorderColor); */
+}
+
+.mesid-input {
+    width: 30px;
+    padding: 0px;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 10px;
+    background-color: var(--SmartThemeBlurTintColor);
+    color: var(--text-color);
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.mesid-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.scroll-toolbar .menu_button {
+    min-width: 30px;
+    padding: 5px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 设置页面样式 */
+.middle-generation_block {
+    margin-bottom: 10px;
+}
+
+.middle-generation_block label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.middle-generation_block .text_pole {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.middle-generation_block textarea {
+    width: 100%;
+    margin-bottom: 5px;
+}

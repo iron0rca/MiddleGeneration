@@ -1,0 +1,12 @@
+{
+    "display_name": "中间生成",
+    "loading_order": 9,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "iron0rca",
+    "version": "1.0.0",
+    "homePage": "https://github.com/iron0rca/MiddleGeneration",
+    "generate_interceptor": "middleGenerationInterceptor"
+}

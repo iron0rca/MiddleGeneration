@@ -1,0 +1,53 @@
+<!-- 工具箱扩展设置 -->
+<div class="middle-generation-settings">
+    <div class="inline-drawer">
+        <div class="inline-drawer-toggle inline-drawer-header">
+            <b>中间生成</b>
+            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+        </div>
+        <div class="inline-drawer-content">
+            <div class="middle-generation_block flex-container">
+                <label class="checkbox_label">
+                    <input id="enable_scroll_toolbar" class="checkbox" type="checkbox" />
+                    <span>开启导航工具栏</span>
+                </label>
+            </div>
+            <div class="middle-generation_block flex-container">
+                <label class="checkbox_label">
+                    <input id="enable_gen_here_button" class="checkbox" type="checkbox" />
+                    <span>显示消息生成按钮</span>
+                </label>
+            </div>
+            <div class="middle-generation_block flex-container">
+                <label class="checkbox_label">
+                    <input id="enable_insert_template_button" class="checkbox" type="checkbox" />
+                    <span>显示插入模板按钮</span>
+                </label>
+            </div>
+            <div class="middle-generation_block flex-container">
+                <label class="checkbox_label">
+                    <input id="enable_import_button" class="checkbox" type="checkbox" />
+                    <span>显示最近输入按钮</span>
+                </label>
+            </div>
+            <div class="middle-generation_block flex-container">
+                <label for="message_history_limit">消息历史记录保留数量:</label>
+                <input id="message_history_limit" class="text_pole" type="number" min="1" max="500" value="100" />
+            </div>
+            <div class="middle-generation_block flex-container">
+                <label for="message_insert_template_format">消息插入模板格式:</label>
+                <select id="message_insert_template_format" class="text_pole">
+                    <option value="full">完整格式</option>
+                    <option value="short">简化格式</option>
+                    <option value="custom">自定义格式</option>
+                </select>
+            </div>
+            <div class="middle-generation_block flex-container" id="custom_template_container" style="display: none;">
+                <label for="custom_template_format">自定义模板格式:</label>
+                <textarea id="custom_template_format" class="text_pole" rows="3"></textarea>
+                <small>占位符说明: {message} = 完整消息, {message:50} = 前50个字符, {message:-50} = 后50个字符</small>
+            </div>
+            <hr class="sysHR" />
+        </div>
+    </div>
+</div>
