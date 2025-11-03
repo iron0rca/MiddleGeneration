@@ -3,11 +3,11 @@
 
 //您可能需要从 extensions.js 导入 extension_settings、getContext 和 loadExtensionSettings
 
-import { sendTextareaMessage, saveChatConditional } from '../../../script.js';
+import { sendTextareaMessage, saveChatConditional } from '../../../../script.js';
 
 // 跟踪扩展的位置，名称应与仓库名称匹配
 const extensionName = 'MiddleGeneration';
-const extensionFolderPath = `scripts/extensions/${extensionName}/`;
+const extensionFolderPath = `scripts/extensions/third-party/${extensionName}/`;
 const defaultSettings = {
     sentMessages: [],
     // 存储最后点击的消息生成按钮的mesid
